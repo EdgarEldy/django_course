@@ -2,31 +2,20 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Categories</h1>
+  <h1 class="h3 mb-2 text-gray-800">Products</h1>
 
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <a href="{% url 'categories_create' %}" class="btn btn-primary"
+      <a href="{% url 'products_create' %}" class="btn btn-primary"
         >Nouveau</a
       >
     </div>
     <div class="card-body">
-      {% comment %} {% if messages %}
+      {% if messages %}
        {% for message in messages %} 
        <p class="alert alert-success w-100 h-100">{{ message }} </p>
        {% endfor %}
-      {% endif %} {% endcomment %}
-
-      {% if messages %}
-       {% for message in messages %} 
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <i class="fas fa-alert mr-1"></i>{{ message }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      {% endfor %}
       {% endif %}
 
       <div class="table-responsive">
@@ -40,29 +29,33 @@
             <tr>
               <th>Id</th>
               <th>Category Name</th>
+              <th>Product Name</th>
+              <th>Unit price</th>
               <th>Options</th>
             </tr>
           </thead>
           <tbody>
-            {% for category in categories %}
+            {% for product in products %}
             <tr>
-              <td>{{ category.id }}</td>
-              <td>{{ category.category_name }}</td>
+              <td>{{ product.id }}</td>
+              <td>{{ product.category.category_name }}</td>
+              <td>{{ product.product_name }}</td>
+              <td>{{ product.unit_price }}</td>
               <td>
                 <a
-                  href="{% url 'categories_edit' category.id %}"
+                  href="{% url 'products_edit' product.id %}"
                   class="btn btn-primary"
                   >Edit</a
                 >
 
                 <form
-                  action="{% url 'categories_delete' category.id %}"
+                  action="{% url 'products_delete' product.id %}"
                   method="post"
                 >
                   {% csrf_token %}
                   <button
                     type="submit"
-                    onclick="return confirm('Voulez vous supprimer cette categorie ?')"
+                    onclick="return confirm('Voulez vous supprimer ce produit ?')"
                     class="btn btn-danger"
                   >
                     Delete
