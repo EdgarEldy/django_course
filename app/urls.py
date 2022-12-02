@@ -16,33 +16,40 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from app import views
+from app.views import home, categories, products, customers, orders, users
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('', views.home.index, name='home'),
-    path('categories/', views.categories.index, name='categories_index'),
-    path('categories/create', views.categories.create, name='categories_create'),
-    path('categories/store', views.categories.store, name='categories_store'),
-    path('categories/edit/<int:id>', views.categories.edit, name='categories_edit'),
-    path('categories/delete/<int:id>', views.categories.delete, name='categories_delete'),
+    path('', home.index, name='home'),
+    path('categories/', categories.index, name='categories_index'),
+    path('categories/create', categories.create, name='categories_create'),
+    path('categories/store', categories.store, name='categories_store'),
+    path('categories/edit/<int:id>', categories.edit, name='categories_edit'),
+    path('categories/delete/<int:id>', categories.delete, name='categories_delete'),
     
-    path('products/', views.products.index, name='products_index'),
-    path('products/create', views.products.create, name='products_create'),
-    path('products/store', views.products.store, name='products_store'),
-    path('products/edit/<int:id>', views.products.edit, name='products_edit'),
-    path('products/delete/<int:id>', views.products.delete, name='products_delete'),
+    path('products/', products.index, name='products_index'),
+    path('products/create', products.create, name='products_create'),
+    path('products/store', products.store, name='products_store'),
+    path('products/edit/<int:id>', products.edit, name='products_edit'),
+    path('products/delete/<int:id>', products.delete, name='products_delete'),
     
-    path('customers/', views.customers.index, name='customers_index'),
-    path('customers/create', views.customers.create, name='customers_create'),
-    path('customers/store', views.customers.store, name='customers_store'),
-    path('customers/edit/<int:id>', views.customers.edit, name='customers_edit'),
-    path('customers/delete/<int:id>', views.customers.delete, name='customers_delete'),
+    path('customers/', customers.index, name='customers_index'),
+    path('customers/create', customers.create, name='customers_create'),
+    path('customers/store', customers.store, name='customers_store'),
+    path('customers/edit/<int:id>', customers.edit, name='customers_edit'),
+    path('customers/delete/<int:id>', customers.delete, name='customers_delete'),
     
-    path('orders/', views.orders.index, name='orders_index'),
-    path('orders/create', views.orders.create, name='orders_create'),
-    path('orders/getProducts', views.orders.getProducts, name='getProducts'),
-    path('orders/getUnitPrice', views.orders.getUnitPrice, name='getUnitPrice'),
-    path('orders/store', views.orders.store, name='orders_store'),
+    path('orders/', orders.index, name='orders_index'),
+    path('orders/create', orders.create, name='orders_create'),
+    path('orders/getProducts', orders.getProducts, name='getProducts'),
+    path('orders/getUnitPrice', orders.getUnitPrice, name='getUnitPrice'),
+    path('orders/store', orders.store, name='orders_store'),
     
+    # users routes
+    path('users/', users.index, name='users_index'),
+    path('login/', users.user_login, name='users_login'),
+    path('register/', users.register, name='users_register'),
+    path('users/store', users.store, name='users_store'),
+    path('logout/', users.user_logout, name='logout'),
+
 ]
